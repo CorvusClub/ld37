@@ -2,47 +2,108 @@
   <head>
     <title>LD37</title>
     <script src="lib/aframe.js"></script>
-    <script src="lib/aframe-html-shader.min.js"></script>
+    <script src="lib/aframe-html-shader.js"></script>
+    <script src="lib/aframe-extras.controls.min.js"></script>
+    <script src="lib/aframe-physics-system.min.js"></script>
+    <script src="lib/aframe-extras.misc.min.js"></script>
     <link rel="stylesheet" href="./index.css" type="text/css"></link>
   </head>
   <body>
     <div id="screen">
-      Hi world<div class="cursor"></div>
+      >
     </div>
-    <a-scene>
+    <a-scene physics>
       <a-assets>
         <a-asset-item id="monitor-obj" src="assets/models/monitor.obj"></a-asset-item>
         <a-asset-item id="monitor-mtl" src="assets/materials/monitor.mtl"></a-asset-item>
+        <a-asset-item id="desk-obj" src="assets/models/Table.obj"></a-asset-item>
+        <a-asset-item id="desk-mtl" src="assets/materials/Table.mtl"></a-asset-item>
         
-        <img src="https://i.imgur.com/25P1geh.png" id="grid" crossorigin="anonymous">
+        <img src="./assets/Textures/desk.JPG" id="desk_texture" crossorigin="anonymous">
+        <img src="./assets/Textures/numpad_sketch_postit.png" id="numpad_sketch_texture" crossorigin="anonymous">
+        
+        <img id="brick" src="./assets/Textures/Brick_A.png" crossorigin="anonymous">
+        <img id="concrete" src="./assets/Textures/Concrete_A.png" crossorigin="anonymous">
         <img id="sky" src="https://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        
+        <a-mixin id="brick" 
+          material="src: #brick; repeat: 2 2; metalness:0.6; roughness: 0.4"></a-mixin>
+        <a-mixin id="concrete" 
+          material="src: #concrete; metalness:0.6; roughness: 0.4"></a-mixin>
       </a-assets>
-      <a-entity id="display" scale="0.5 0.5 0.5" position="0 0.7 0" clickable>
+      
+      <a-entity id="desk" rotation="0 0 0" position="0 0.5 0" obj-model="obj: #desk-obj" scale="6 6 6" material="src: #desk_texture"
+        static-body="shape: box"></a-entity>
+      <a-entity id="display" scale="0.5 0.5 0.5" position="0 0.8 0" clickable>
         <a-entity rotation="0 -90 0" position="0 2.2 0" obj-model="obj: #monitor-obj; mtl: #monitor-mtl"></a-entity>
-        <a-plane rotation="0 0 0" position="0 2.2 0.015" width="3.92" height="1.7" material="shader:html;target:#screen;transparent:false;fps:10"></a-plane>
+        <a-plane id="monitor_screen" rotation="0 0 0" position="0 2.2 0.015" width="3.92" height="1.7" material="shader:html;target:#screen;transparent:false;fps:0"></a-plane>
       </a-entity>
       
+      <a-entity id="numpad_sketch"
+        position="0 1.2 -0.06"
+        rotation="0 0 0"
+        geometry="primitive: plane; width: 0.3; height: 0.3;" rotation="-90 0 0"
+        material="src:#numpad_sketch_texture; transparent: true; metalness:0.6; roughness: 0.4">
+      </a-entity>
       
-      <a-entity position="0 0 0"
-        geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
-        material="src: #grid; repeat: 10000 10000; transparent: true;metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
+      <a-box class="wall" id="back_wall"
+        position="0 3.5 -7"
+        width=14
+        height=7
+        depth=1
+        static-body
+        mixin="brick"></a-box>
+        
+      <a-box class="wall" id="front_wall"
+        position="0 3.5 7"
+        width=14
+        height=7
+        depth=1
+        static-body
+        mixin="brick"></a-box>
+        
+      <a-box class="wall" id="left_wall"
+        position="-7 3.5 0"
+        width=1
+        height=7
+        depth=14
+        static-body
+        mixin="brick"></a-box>
+        
+      <a-box class="wall" id="right_wall"
+        position="7 3.5 0"
+        width=1
+        height=7
+        depth=14
+        static-body
+        mixin="brick"></a-box>
+      
+      <a-box class="wall" id="ceiling"
+        position="0 7 0"
+        width=14
+        height=1
+        depth=14
+        static-body
+        mixin="concrete"></a-box>
+        
+      <a-box class="wall" id="floor"
+        position="0 -0.5 0"
+        width=14
+        height=1
+        depth=14
+        static-body
+        mixin="concrete"></a-box>
 
-      <a-entity position="0 0 3.8" id="camera-container">
-        <a-camera>
-            <a-entity cursor
-                      position="0 0 -1"
-                      geometry="primitive: circle"
-                      material="visible: false; shader: flat">
-            </a-entity>
-        </a-camera>
+      <a-entity
+        camera="fov:60"
+        universal-controls
+        kinematic-body="radius:0.5"
+        position="0 1.6 5">
       </a-entity>
-      
-      <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
-      <a-entity light="color: ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
-      <a-entity light="color: white; intensity: 0.5" position="-5 5 15"></a-entity>
-      <a-entity light="color: white; type: ambient;"></a-entity>
       
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+      
+      <a-entity light="type: ambient; color: #BBB"></a-entity>
 
     </a-scene>
     <script src="index.js"></script>

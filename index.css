@@ -1,28 +1,103 @@
 #screen {
-    background-color: black;
-    color: green;
-    width: calc(392px * 3);
-    height: calc(170px * 3);
-    position: absolute;
-    z-index: 0;
-    font-size: 40px;
+  background-color: black;
+  color: white;
+  width: calc(392px * 3);
+  height: calc(170px * 3);
+  position: absolute;
+  z-index: 0;
+  font-size: 40px;
+  overflow-y: scroll;
 }
 
 #screen .cursor {
-    display: inline-block;
-    width: 0.5rem;
-    height: 1rem;
-    background-color: green;
+  display: inline-block;
+  width: 0.5rem;
+  height: 2rem;
+  background-color: white;
 }
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 @keyframes blink {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./assets/font/icomoon.eot?wvl5n4');
+  src:  url('./assets/font/icomoon.eot?wvl5n4#iefix') format('embedded-opentype'),
+    url('./assets/font/icomoon.ttf?wvl5n4') format('truetype'),
+    url('./assets/font/icomoon.woff?wvl5n4') format('woff'),
+    url('./assets/font/icomoon.svg?wvl5n4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.symbol {
+  width: 1em;
+  height: 1em;
+  background-size: 100%;
+  display: inline-block;
+  font-family: 'icomoon';
+}
+
+.symbol.error {
+  color: red;
+}
+
+.symbol.command {
+  color: #2082CC;
+}
+
+.symbol.success {
+  color: green;
+}
+
+.symbol.file {
+  color: #F0E68C;
+}
+
+.symbol.duk:before {
+  content: "\e900";
+}
+
+.symbol.ha:before {
+  content: "\e901";
+}
+
+.symbol.ju:before {
+  content: "\e902";
+}
+
+.symbol.kov:before {
+  content: "\e903";
+}
+
+.symbol.miln:before {
+  content: "\e904";
+}
+
+.symbol.sef:before {
+  content: "\e905";
+}
+
+.symbol.sig:before {
+  content: "\e906";
+}
+
+.symbol.uln:before {
+  content: "\e907";
+}
+
+.symbol.vit:before {
+  content: "\e908";
+}
+
+.symbol.zaaz:before {
+  content: "\e909";
 }
