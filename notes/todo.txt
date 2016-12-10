@@ -1,0 +1,14 @@
+major strokes:
+- input and output (append stuff to #screen element), use keypad input in index.js
+- general operating system
+- computer filesystem
+
+polish:
+- add an actual room (maybe just primitive squares for now? we can texture them using the Textures folder)
+- a desk?
+- how the hell are we going to do notes lying around / post its or w/e
+
+small things:
+- click computer to lock view to screen (currently clicking it teleports you in front of it)
+- hit escape to leave screen view
+- make a beep when you press a symbol (use bry's beeps)

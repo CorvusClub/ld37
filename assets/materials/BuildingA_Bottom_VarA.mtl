@@ -1,0 +1,58 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.1.187496374)
+
+newmtl BrickStraight_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\BrickStraight_A.png
+
+newmtl Brick_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\Brick_A.png
+
+newmtl BrickBLight_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\BrickBLight_A.png
+
+newmtl ConcreteB_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\ConcreteB_A.png
+
+newmtl Wall_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\Wall_A.png
+
+newmtl ChippedWood_mat
+Kd 0.8 0.8 0.8
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+map_Kd ..\Textures\ChippedWood_A.png
+
+newmtl Glass
+Kd 0 0 0
+Ka 0 0 0
+Ke 0 0 0
+d 1
+illum 1
+
