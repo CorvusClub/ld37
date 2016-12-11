@@ -39,7 +39,7 @@
   font-style: normal;
 }
 .symbol {
-  width: 1em;
+  width: 0.82em;
   height: 1em;
   background-size: 100%;
   display: inline-block;
@@ -60,6 +60,10 @@
 
 .symbol.file {
   color: #F0E68C;
+}
+
+.symbol.parameter {
+  color: purple;
 }
 
 .symbol.duk:before {
@@ -100,4 +104,57 @@
 
 .symbol.zaaz:before {
   content: "\e909";
+}
+.symbol.number0:before {
+  content: "\e90a";
+}
+.symbol.number1:before {
+  content: "\e90b";
+}
+.symbol.number2:before {
+  content: "\e90c";
+}
+.symbol.number3:before {
+  content: "\e90d";
+}
+.symbol.number4:before {
+  content: "\e90e";
+}
+.symbol.number5:before {
+  content: "\e90f";
+}
+.symbol.number6:before {
+  content: "\e910";
+}
+.symbol.number7:before {
+  content: "\e911";
+}
+.symbol.number8:before {
+  content: "\e912";
+}
+.symbol.number9:before {
+  content: "\e913";
+}
+.symbol.eib:before {
+  content: "\e914";
+}
+.symbol.faa:before {
+  content: "\e915";
+}
+.symbol.nuug:before {
+  content: "\e916";
+}
+.symbol.yze:before {
+  content: "\e917";
+}
+.symbol.path_sep {
+  width: 0.3em;
+}
+.symbol.path_sep:before {
+  content: "/";
+}
+
+#screen img {
+  max-width: 50%;
+  max-height: 50%;
 }

@@ -12,12 +12,14 @@
     <div id="screen">
       >
     </div>
-    <a-scene physics>
+    <a-scene physics vr-mode-ui="enabled: false">
       <a-assets>
         <a-asset-item id="monitor-obj" src="assets/models/monitor.obj"></a-asset-item>
         <a-asset-item id="monitor-mtl" src="assets/materials/monitor.mtl"></a-asset-item>
         <a-asset-item id="desk-obj" src="assets/models/Table.obj"></a-asset-item>
         <a-asset-item id="desk-mtl" src="assets/materials/Table.mtl"></a-asset-item>
+        <a-asset-item id="numpad-obj" src="assets/models/numpad.obj"></a-asset-item>
+        <a-asset-item id="numpad-mtl" src="assets/materials/numpad.mtl"></a-asset-item>
         
         <img src="./assets/Textures/desk.JPG" id="desk_texture" crossorigin="anonymous">
         <img src="./assets/Textures/numpad_sketch_postit.png" id="numpad_sketch_texture" crossorigin="anonymous">
@@ -27,14 +29,35 @@
         <img id="sky" src="https://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
         
         <a-mixin id="brick" 
-          material="src: #brick; repeat: 2 2; metalness:0.6; roughness: 0.4"></a-mixin>
+          material="src: #brick; repeat: 2 2; metalness:0.1; roughness: 1"></a-mixin>
         <a-mixin id="concrete" 
-          material="src: #concrete; metalness:0.6; roughness: 0.4"></a-mixin>
+          material="src: #concrete; metalness:0.1; roughness: 1"></a-mixin>
+          
+        <audio id="computer_on" src="./assets/audio/computer on.mp3"></audio>
+        <audio id="invalid_input" src="./assets/audio/invalid input.mp3"></audio>
+        <audio id="valid_input" src="./assets/audio/valid input.mp3"></audio>
+        <audio id="click1" src="./assets/audio/finished click 1.mp3"></audio>
+        <audio id="click2" src="./assets/audio/finished click 2.mp3"></audio>
+        <audio id="click3" src="./assets/audio/finished click 3.mp3"></audio>
+        <audio id="fan" src="./assets/audio/raw computer fan.mp3"></audio>
+        <audio id="disk_spin" src="./assets/audio/disk drive spinning.mp3"></audio>
       </a-assets>
       
       <a-entity id="desk" rotation="0 0 0" position="0 0.5 0" obj-model="obj: #desk-obj" scale="6 6 6" material="src: #desk_texture"
         static-body="shape: box"></a-entity>
-      <a-entity id="display" scale="0.5 0.5 0.5" position="0 0.8 0" clickable>
+        
+      <a-entity id="numpad" rotation="0 0 0" position="0 1 0.3" obj-model="obj: #numpad-obj; mtl: #numpad-mtl" scale="0.1 0.1 0.1"></a-entity>
+        
+      <a-entity id="display"
+      scale="0.5 0.5 0.5" position="0 0.83 0">
+        <a-entity id="error_sound" sound="src: #invalid_input; volume: 0.4; poolSize: 3"></a-entity>
+        <a-entity id="success_sound" sound="src: #valid_input; volume: 0.2; poolSize: 3"></a-entity>
+        <a-entity id="click1_sound" sound="src: #click1; volume: 0.5; poolSize: 3"></a-entity>
+        <a-entity id="click2_sound" sound="src: #click2; volume: 0.5; poolSize: 3"></a-entity>
+        <a-entity id="click3_sound" sound="src: #click3; volume: 0.5; poolSize: 3"></a-entity>
+        <a-entity id="boot_sound" sound="src: #computer_on; volume: 0.4; autoplay: true"></a-entity>
+        <a-entity id="fan_sound" sound="src: #fan; volume: 0.8; autoplay: true; loop: true"></a-entity>
+        <a-entity id="disk_spin_sound" sound="src: #disk_spin; volume: 1"></a-entity>
         <a-entity rotation="0 -90 0" position="0 2.2 0" obj-model="obj: #monitor-obj; mtl: #monitor-mtl"></a-entity>
         <a-plane id="monitor_screen" rotation="0 0 0" position="0 2.2 0.015" width="3.92" height="1.7" material="shader:html;target:#screen;transparent:false;fps:0"></a-plane>
       </a-entity>
@@ -43,7 +66,7 @@
         position="0 1.2 -0.06"
         rotation="0 0 0"
         geometry="primitive: plane; width: 0.3; height: 0.3;" rotation="-90 0 0"
-        material="src:#numpad_sketch_texture; transparent: true; metalness:0.6; roughness: 0.4">
+        material="src:#numpad_sketch_texture; shader:flat; transparent: true; metalness:0.1; roughness: 1">
       </a-entity>
       
       <a-box class="wall" id="back_wall"
@@ -87,9 +110,9 @@
         mixin="concrete"></a-box>
         
       <a-box class="wall" id="floor"
-        position="0 -0.5 0"
+        position="0 -1 0"
         width=14
-        height=1
+        height=2
         depth=14
         static-body
         mixin="concrete"></a-box>
@@ -103,9 +126,12 @@
       
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
       
-      <a-entity light="type: ambient; color: #BBB"></a-entity>
+      <a-entity id="numpad_light"
+        position="0 6 0"
+        light="color: #fff00; distance: 10; intensity: 0.6; type: point"></a-entity>
 
     </a-scene>
     <script src="index.js"></script>
+    <script src="audio.js"></script>
   </body>
 </html>
