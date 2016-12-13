@@ -1,4 +1,4 @@
-#screen {
+.screen {
   background-color: black;
   color: white;
   width: calc(392px * 3);
@@ -7,6 +7,13 @@
   z-index: 0;
   font-size: 40px;
   overflow-y: scroll;
+}
+.screen.off {
+  background-color: black !important;
+}
+#wall_screen_1, #wall_screen_2, #wall_screen_3 {
+  background-color: green;
+  color: white;
 }
 
 #screen .cursor {

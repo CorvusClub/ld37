@@ -6,15 +6,20 @@ cursor.className = "cursor";
 screen.appendChild(cursor);
 
 var scene = document.querySelector("a-scene");
-var htmlRenderBehavior;
+var assets = document.querySelector("a-assets");
+
+var htmlRenderBehaviors;
 scene.addEventListener("loaded", function() {
-  htmlRenderBehavior = scene.behaviors.find(function(behavior) {
+  htmlRenderBehaviors = scene.behaviors.filter(function(behavior) {
     return behavior.__render
   });
-})
+});
+
 function renderScreen() {
-  if(htmlRenderBehavior) {
-    htmlRenderBehavior.__render();
+  if(htmlRenderBehaviors) {
+    htmlRenderBehaviors.forEach(function(renderer) {
+      renderer.__render();
+    });
   }
 }
 
@@ -24,6 +29,10 @@ var fs = {
     kov yze uln`,
   "kov faa": {
     "kov": "kov image|./assets/Textures/desk.JPG"
+  },
+  "duk faa zaaz": {
+    "zaaz miln vit nuug": "audio|Roverboard",
+    "eib miln duk yze": "audio|Hoversword"
   }
 };
 
@@ -47,6 +56,24 @@ function writeCharacter(char, type) {
     img.src = image_path;
     screen.appendChild(img);
     screen.scrollTop = screen.scrollHeight;
+    return;
+  }
+  if(char.match(/audio\|/)) {
+    var sound = Sound[char.split("|")[1]];
+    if(Sound.Roverboard.customIsPlaying) {
+      Sound.Roverboard.stopSound();
+    }
+    if(Sound.Hoversword.customIsPlaying) {
+      Sound.Hoversword.stopSound();
+    }
+    if(sound.customIsPlaying) {
+      sound.stopSound();
+      sound.customIsPlaying = false;
+    }
+    else {
+      sound.playSound();
+      sound.customIsPlaying = true;
+    }
     return;
   }
   var character = document.createElement("span");
@@ -158,6 +185,11 @@ function help() {
   writeCharacter("duk", "command");
   writeCharacter("sef", "command");
   writeSentence("uln", "file");
+  newLine();
+  screen.innerHTML += "- "
+  writeCharacter("sig", "command");
+  writeSentence("uln", "file");
+  writeCharacter("vit", "command");
   
   return true;
 }
@@ -198,8 +230,9 @@ function readFile() {
       Sound.Disk.playSound();
       writeSentence(fileName, "file");
       newLine();
-      writeLine(file);
+      renderScreen();
       setTimeout(function() {
+        writeLine(file);
         renderScreen();
       
         resolve("nosound");
@@ -265,12 +298,42 @@ function upDir() {
   return true;
 }
 
+var monitors = [
+  document.querySelector("#wall_screen_1"),
+  document.querySelector("#wall_screen_2"),
+  document.querySelector("#wall_screen_3"),
+];
+var monitor_planes = [
+  document.querySelector("#wall_screen_1_plane"),
+  document.querySelector("#wall_screen_2_plane"),
+  document.querySelector("#wall_screen_3_plane"),
+];
+function turnOnMonitor() {
+  var monitor_number = currentInput[1];
+  if(monitor_number < 1) {
+    writeCharacter("0", "file");
+    writeSentence("eib", "error");
+    return false;
+  }
+  if(monitor_number > 3) {
+    writeCharacter(monitor_number.toString(), "file");
+    writeSentence("ju eib", "error");
+    return false;
+  }
+  var monitor = monitors[monitor_number - 1];
+  var monitor_plane = monitor_planes[monitor_number - 1];
+  
+  monitor.classList.remove("off");
+  monitor_plane.setAttribute("light", "color: green; distance: 5; intensity: 0.4; type: point");
+}
+
 var commands = {
   "^ha sig$": help,
   "^ha kov$": ls,
   "^sef (.*)$": readFile,
   "^duk sef (.*)$": cd,
   "^duk sef$": upDir,
+  "^sig [0-9]+ vit$": turnOnMonitor,
 };
 
 
@@ -312,7 +375,6 @@ function parseInput() {
 }
 
 document.body.addEventListener("keypress", function(event) {
-  console.log(event.code);
   if(event.code === "Numpad0" || event.code === "Digit0") {
     writeInput("duk");
   }

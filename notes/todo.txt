@@ -12,3 +12,15 @@ small things:
 - click computer to lock view to screen (currently clicking it teleports you in front of it)
 - hit escape to leave screen view
 - make a beep when you press a symbol (use bry's beeps)
+
+DONE THIS
+
+replace screens canvas
+Screen show Incremental Game
+Game about chipping away at the outside of the building
+MIDDLE SCREEN:
+House with tools hitting it?
+LEFT SCREEN:
+Tool construction(Combine to make Pickaxe) (INSTRUCTION)
+RIGHT SCREEN:
+Resource Refining(Iron to Rods and Pick Heads) (INSTRUCTION)

@@ -1,7 +1,6 @@
 var Sound = {};
 Sound.Click = function() {
     var index  = Math.round(Math.random() * 2) + 1;
-    console.log(index);
     return Sound["Click" + index];
 };
 
@@ -14,6 +13,8 @@ scene.addEventListener("loaded", function() {
     Sound.Click2 = document.querySelector("#click2_sound").components.sound;
     Sound.Click3 = document.querySelector("#click3_sound").components.sound;
     Sound.Disk = document.querySelector("#disk_spin_sound").components.sound;
+    Sound.Hoversword = document.querySelector("#hoversword_sound").components.sound;
+    Sound.Roverboard = document.querySelector("#roverboard_sound").components.sound;
     
     Sound.Boot.playSound();
 });
